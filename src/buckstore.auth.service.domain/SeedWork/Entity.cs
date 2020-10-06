@@ -7,16 +7,16 @@ namespace buckstore.auth.service.domain.SeedWork
 	public class Entity
 	{
 		private int? _requestedHashCode;
-		private string _Id;
+		private Guid _Id;
 
-		public virtual string Id
+		public virtual Guid Id
 		{
 			get { return _Id; }
 		}
 
 		protected void SetId()
 		{
-			_Id = Guid.NewGuid().ToString();
+			_Id = Guid.NewGuid();
 		} 
 		
 			
@@ -24,7 +24,7 @@ namespace buckstore.auth.service.domain.SeedWork
 		#region Entity
 		public bool IsTransient()
 		{
-			return this.Id == default(string);
+			return this.Id == default(Guid);
 		}
 
 		public override bool Equals(object obj)
@@ -80,7 +80,7 @@ namespace buckstore.auth.service.domain.SeedWork
 
 		public void AddDomainEvent(INotification eventItem)
 		{
-			_domainEvents = _domainEvents ?? new List<INotification>();
+			_domainEvents ??= new List<INotification>();
 			_domainEvents.Add(eventItem);
 		}
 
