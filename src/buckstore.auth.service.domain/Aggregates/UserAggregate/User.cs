@@ -7,26 +7,25 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
 {
     public class User : Entity, IAggregateRoot
     {
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-        public string Email { get; private set; }
-        public string Password { get; private set; }
-        public string CredCard { get; private set; }
-        public string  Cpf { get; private set; }
-        public Address Address { get; private set; }
-        public byte[] PasswordSalt { get; private set; }
-        
+        private string _name;
+        private string _surname;
+        private string _email;
+        private string _password;
+        private string _credCard;
+        private string  _cpf;
+        public Address Address { get; set; }
+        private byte[] _passwordSalt;        
         protected User() { }
 
         public User(string name, string surname, string email, string password, string credCard, string cpf, Address address)
         {
-            Name = name;
-            Surname = surname;
-            Email = email;
-            PasswordSalt = GenerateSalt();
-            Password = CreateHashPassword(password, PasswordSalt);
-            CredCard = credCard;
-            Cpf = cpf;
+            _name = name;
+            _surname = surname;
+            _email = email;
+            _passwordSalt = GenerateSalt();
+            _password = CreateHashPassword(password, _passwordSalt);
+            _credCard = credCard;
+            _cpf = cpf;
             Address = address;
         }
         
