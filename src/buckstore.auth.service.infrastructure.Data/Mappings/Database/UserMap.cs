@@ -34,8 +34,7 @@ namespace buckstore.auth.service.infrastructure.Data.Mappings.Database
 			
 			builder.Property<string>("_credCard")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
-				.HasColumnName("credCard")
-				.IsRequired();
+				.HasColumnName("credCard");
 			
 			builder.Property<string>("_cpf")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)

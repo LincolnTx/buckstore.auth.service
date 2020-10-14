@@ -16,5 +16,9 @@
       <ProjectReference Include="..\buckstore.auth.service.domain\buckstore.auth.service.domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations" />
+    </ItemGroup>
+
     
 </Project>
