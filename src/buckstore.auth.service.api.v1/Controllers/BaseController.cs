@@ -6,7 +6,7 @@
 
 namespace buckstore.auth.service.api.v1.Controllers
 {
-	[Route("your-project-name/[controller]")]
+	[Route("auth/[controller]")]
 	[ServiceFilter(typeof(GlobalExceptionFilterAttribute))]
 	public class BaseController : Controller
 	{
