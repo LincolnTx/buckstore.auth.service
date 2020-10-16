@@ -1,6 +1,6 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using buckstore.auth.service.application.Commands;
 using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using buckstore.auth.service.domain.Exceptions;
@@ -9,34 +9,37 @@ using MediatR;
 
 namespace buckstore.auth.service.application.CommandHandlers
 {
-    public class CreateUserCommandHandler : CommandHandler, IRequestHandler<CreateUserCommand, User>
+    public class CreateUserCommandHandler : CommandHandler, IRequestHandler<CreateUserCommand, CreateUserDto>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
         public CreateUserCommandHandler(IUnitOfWork uow, 
             IMediator bus, 
             INotificationHandler<ExceptionNotification> notifications,
-            IUserRepository userRepository) : base(uow, bus, notifications)
+            IUserRepository userRepository, IMapper mapper) : base(uow, bus, notifications)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
-        public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<CreateUserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            // validations
             if (!request.IsValid())
             {
                 NotifyValidationErrors(request);
                 return null;
             }
-            // implementations and call repo
             
-            // commit 
+            var user = new User(request.Name, request.Surname, request.Email, request.Password, request.Cpf);
+            var userDto = _mapper.Map<CreateUserDto>(user);
+            
+            _userRepository.Add(user);
+
             if (await Commit())
             {
-                //return user;
+                return userDto;
             }
             
-            //return 
             return null;
         }
     }

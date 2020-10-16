@@ -1,6 +1,11 @@
 ﻿using System;
 using AutoMapper.Configuration;
+using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using buckstore.auth.service.domain.Exceptions;
+using buckstore.auth.service.domain.SeedWork;
+using buckstore.auth.service.infrastructure.Data.Context;
+using buckstore.auth.service.infrastructure.Data.Repositories.UserRepository;
+using buckstore.auth.service.infrastructure.Data.UnitOfWork;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,13 +21,13 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC
 
 		public static void RegisterData(IServiceCollection services)
 		{
-			// here goes your repository injection
-			// sample: services.AddScoped<IUserRepository, UserRepository>();
+			services.AddDbContext<ApplicationDbContext>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
+			services.AddScoped<IUserRepository, UserRepository>();
 		}
 
 		public static void RegisterMediatR(IServiceCollection services)
 		{
-			// injection for Mediator
 			services.AddScoped<INotificationHandler<ExceptionNotification>, ExceptionNotificationHandler>();
 		}
 	}

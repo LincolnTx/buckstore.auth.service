@@ -9,7 +9,7 @@ namespace buckstore.auth.service.api.v1.Controllers
     public class RegisterController : BaseController
     {
         private readonly IMediator _mediator;
-        protected RegisterController(INotificationHandler<ExceptionNotification> notifications, 
+        public  RegisterController (INotificationHandler<ExceptionNotification> notifications, 
             IMediator mediator) : base(notifications)
         {
             _mediator = mediator;
@@ -18,9 +18,9 @@ namespace buckstore.auth.service.api.v1.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserCommand createUserCommand)
         {
-            await _mediator.Send(createUserCommand);
+           var userCreated = await _mediator.Send(createUserCommand);
 
-            return Response(200);
+            return Response(200, userCreated);
         }
     }
 }
