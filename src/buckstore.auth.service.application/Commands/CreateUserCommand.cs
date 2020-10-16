@@ -1,10 +1,9 @@
 ﻿using buckstore.auth.service.application.Validations;
-using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using MediatR;
 
 namespace buckstore.auth.service.application.Commands
 {
-    public class CreateUserCommand : Command, IRequest<User>
+    public class CreateUserCommand : Command, IRequest<CreateUserDto>
     {
         public string Name { get; set; }
         public string Surname { get; set; }

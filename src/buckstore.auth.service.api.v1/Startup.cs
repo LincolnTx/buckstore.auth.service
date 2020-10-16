@@ -46,10 +46,10 @@ namespace buckstore.auth.service.api.v1
 			}
 
 			app.UseHttpsRedirection();
-
+			
 			app.UseRouting();
 
-			app.UseAuthorization();
+			// app.UseAuthorization();
 			app.UseSwaggerSetup();
 
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
