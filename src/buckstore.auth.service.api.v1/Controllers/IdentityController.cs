@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace buckstore.auth.service.api.v1.Controllers
 {
-    public class RegisterController : BaseController
+    public class IdentityController : BaseController
     {
         private readonly IMediator _mediator;
-        public  RegisterController (INotificationHandler<ExceptionNotification> notifications, 
+        public  IdentityController (INotificationHandler<ExceptionNotification> notifications, 
             IMediator mediator) : base(notifications)
         {
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserCommand createUserCommand)
         {
            var userCreated = await _mediator.Send(createUserCommand);

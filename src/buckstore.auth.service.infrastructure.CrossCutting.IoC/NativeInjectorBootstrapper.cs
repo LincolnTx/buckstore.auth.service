@@ -35,6 +35,8 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC
 		public static void RegisterEnvironments(IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddSingleton(configuration.GetSection("AppConfigurations").Get<AppConfigurations>());
+			services.AddSingleton(configuration.GetSection("JwtSettings").Get<JwtSettings>());
+			
 		}
 	}
 }
