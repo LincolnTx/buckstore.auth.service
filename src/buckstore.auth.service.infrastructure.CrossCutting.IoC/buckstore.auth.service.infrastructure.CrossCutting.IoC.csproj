@@ -12,6 +12,7 @@
     
     <ItemGroup>
       <ProjectReference Include="..\buckstore.auth.service.application\buckstore.auth.service.application.csproj" />
+      <ProjectReference Include="..\buckstore.auth.service.environment\buckstore.auth.service.environment.csproj" />
       <ProjectReference Include="..\buckstore.auth.service.infrastructure.Data\buckstore.auth.service.infrastructure.Data.csproj" />
     </ItemGroup>
     

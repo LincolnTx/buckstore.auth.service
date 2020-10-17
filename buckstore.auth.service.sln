@@ -22,6 +22,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.auth.service.infr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.auth.service.infrastructure.Data", "src\buckstore.auth.service.infrastructure.Data\buckstore.auth.service.infrastructure.Data.csproj", "{E5E4E82D-0B13-4360-A6E5-011BFC97FDA7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - Environment", "05 - Environment", "{A89242FB-0F32-4999-AA28-CEB2D3D32E7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.auth.service.environment", "src\buckstore.auth.service.environment\buckstore.auth.service.environment.csproj", "{876E86B0-27E1-48DE-8876-3ABBA8CA2C2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,10 @@ Global
 		{E5E4E82D-0B13-4360-A6E5-011BFC97FDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5E4E82D-0B13-4360-A6E5-011BFC97FDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5E4E82D-0B13-4360-A6E5-011BFC97FDA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{876E86B0-27E1-48DE-8876-3ABBA8CA2C2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{876E86B0-27E1-48DE-8876-3ABBA8CA2C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{876E86B0-27E1-48DE-8876-3ABBA8CA2C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{876E86B0-27E1-48DE-8876-3ABBA8CA2C2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2FA777D6-8B26-4380-9ABF-837C1C2A59E0} = {9DBA9B17-4908-41F9-84F4-F92B8A7B9687}
@@ -57,5 +65,6 @@ Global
 		{FAF1DA31-C0AE-472F-A92E-66A490C1A1C6} = {6155732A-706C-4497-9688-9E67BA968C9C}
 		{EC0571D6-5D42-4828-85EA-2BB4B638B875} = {BF8E0603-2108-4735-A96B-6B4C19ED5F57}
 		{E5E4E82D-0B13-4360-A6E5-011BFC97FDA7} = {BF7DB858-D3FD-4350-BC24-E930F7B9B7C3}
+		{876E86B0-27E1-48DE-8876-3ABBA8CA2C2B} = {A89242FB-0F32-4999-AA28-CEB2D3D32E7F}
 	EndGlobalSection
 EndGlobal
