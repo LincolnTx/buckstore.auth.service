@@ -1,13 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using buckstore.auth.service.application.EventHandlers;
 using buckstore.auth.service.application.IntegrationEvents.Events;
 
 namespace buckstore.auth.service.application.IntegrationEvents.EventHandling
 {
-    public class UserCreatedIntegrationEventHandler : IIntegrationEventHandler<UserCreatedIntegrationEvent>
+    // change to use IIntegrationEventHandler<UserCreatedIntegrationEvent>
+    public class UserCreatedIntegrationEventHandler : EventHandler<UserCreatedIntegrationEvent>
     {
-        public Task Handle(UserCreatedIntegrationEvent @event)
+        public override Task Handle(UserCreatedIntegrationEvent notification, CancellationToken cancellationToken)
         {
-            // insert new user no mongo db
+            // insert info on Mongo
             throw new System.NotImplementedException();
         }
     }

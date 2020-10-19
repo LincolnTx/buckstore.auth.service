@@ -14,7 +14,8 @@ namespace buckstore.auth.service.application.AutoMapper.UserMaps
         public void CreateUserDto()
         {
             CreateMap<User, CreateUserDto>()
-                .ConstructUsing(user => new CreateUserDto(user.GetName, user.GetSurname, user.GetEmail, user.GetCpf));
+                .ConstructUsing(user => new CreateUserDto(user.Id, user.GetName, user.GetSurname,
+                    user.GetEmail, user.GetCpf, user.GetPassword, user.GetSalt));
         }
     }
 }

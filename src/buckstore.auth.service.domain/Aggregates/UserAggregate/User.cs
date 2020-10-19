@@ -14,11 +14,13 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
         private string _email;
         public string GetEmail => _email;
         private string _password;
+        public string GetPassword => _password;
         private string _credCard; //cred card might be a value obj
         private string  _cpf;
         public string GetCpf => _cpf;
         public Address Address { get; set; }
         private byte[] _passwordSalt;
+        public byte[] GetSalt => _passwordSalt;
         protected User() { }
 
         public User(string name, string surname, string email, string password, string cpf)

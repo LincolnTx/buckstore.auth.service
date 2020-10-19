@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using buckstore.auth.service.application.Commands;
+using buckstore.auth.service.application.IntegrationEvents.Events;
 using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using buckstore.auth.service.domain.Exceptions;
 using buckstore.auth.service.domain.SeedWork;
@@ -37,6 +38,9 @@ namespace buckstore.auth.service.application.CommandHandlers
 
             if (await Commit())
             {
+                var userIntegrationEvent =new UserCreatedIntegrationEvent(userDto);
+                await _bus.Publish(userIntegrationEvent, cancellationToken);
+                
                 return userDto;
             }
             
