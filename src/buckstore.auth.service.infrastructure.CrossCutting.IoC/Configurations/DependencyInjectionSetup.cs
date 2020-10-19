@@ -9,6 +9,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC.Configurations
 		public static void AddDependencyInjectionSetup(this IServiceCollection services, IConfiguration configuration)
 		{
 			if (services == null) throw new ArgumentNullException(nameof(services));
+			if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
 			NativeInjectorBootstrapper.RegisterServices(services, configuration);
 		}

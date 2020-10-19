@@ -1,4 +1,5 @@
-﻿using buckstore.auth.service.domain.Aggregates.UserAggregate;
+﻿using buckstore.auth.service.application.Services.AuthQueryServices;
+using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using buckstore.auth.service.domain.Exceptions;
 using buckstore.auth.service.domain.SeedWork;
 using buckstore.auth.service.environment.Configuration;
@@ -18,6 +19,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC
 			RegisterData(services);
 			RegisterMediatR(services);
 			RegisterEnvironments(services, configuration);
+			RegisterQueries(services);
 		}
 
 		public static void RegisterData(IServiceCollection services)
@@ -25,6 +27,11 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC
 			services.AddDbContext<ApplicationDbContext>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<IUserRepository, UserRepository>();
+		}
+
+		public static void RegisterQueries(IServiceCollection services)
+		{
+			services.AddScoped<IAuthQueryService, AuthQueryService>();
 		}
 
 		public static void RegisterMediatR(IServiceCollection services)
