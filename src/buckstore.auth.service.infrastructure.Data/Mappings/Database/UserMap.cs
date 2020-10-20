@@ -9,6 +9,8 @@ namespace buckstore.auth.service.infrastructure.Data.Mappings.Database
 		public void Configure(EntityTypeBuilder<User> builder)
 		{
 			builder.ToTable("User");
+			
+			builder.HasIndex("_email").IsUnique();
 
 			builder.HasKey(user => user.Id);
 
