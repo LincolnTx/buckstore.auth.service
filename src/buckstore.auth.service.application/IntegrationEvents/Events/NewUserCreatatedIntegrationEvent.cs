@@ -8,6 +8,7 @@ namespace buckstore.auth.service.application.IntegrationEvents.Events
     public class UserCreatedIntegrationEvent : Event
     {
         public Guid UserId { get; }
+        public string Name { get; set; }
         public string Email { get; }
         public string Password { get; }
         public byte[] PasswordSalt { get; }
@@ -16,6 +17,7 @@ namespace buckstore.auth.service.application.IntegrationEvents.Events
         public UserCreatedIntegrationEvent(CreateUserDto userDto)
         {
             UserId = userDto.Id;
+            Name = userDto.Name;
             Email = userDto.Email;
             Password = userDto.Password;
             PasswordSalt = userDto.PasswordSalt;
