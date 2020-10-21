@@ -13,14 +13,18 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
     public class IdentityService : IIdentityService
     {
         private readonly JwtSettings _jwtSettings;
-        private readonly TokenValidationParameters _tokenValidationParameters;
+        // private readonly TokenValidationParameters _tokenValidationParameters;
 
-        public IdentityService(JwtSettings jwtSettings, TokenValidationParameters tokenValidationParameters)
+        public IdentityService(JwtSettings jwtSettings)
         {
             _jwtSettings = jwtSettings;
-            _tokenValidationParameters = tokenValidationParameters;
+            // _tokenValidationParameters = tokenValidationParameters;
         }
 
+         public AuthenticationResult GenerateToken(string userId, string email)
+         {
+             return GenerateAuthenticationResult(userId, email);
+         }
         public async Task<AuthenticationResult> RefreshToken(string token, string refreshToken)
         {
             throw new NotImplementedException();

@@ -3,6 +3,7 @@ using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using buckstore.auth.service.domain.Exceptions;
 using buckstore.auth.service.domain.SeedWork;
 using buckstore.auth.service.environment.Configuration;
+using buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentity;
 using buckstore.auth.service.infrastructure.Data.Context;
 using buckstore.auth.service.infrastructure.Data.Repositories.UserRepository;
 using buckstore.auth.service.infrastructure.Data.UnitOfWork;
@@ -20,6 +21,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC
 			RegisterMediatR(services);
 			RegisterEnvironments(services, configuration);
 			RegisterQueries(services);
+			RegisterIdentityService(services);
 		}
 
 		public static void RegisterData(IServiceCollection services)
@@ -37,6 +39,11 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC
 		public static void RegisterMediatR(IServiceCollection services)
 		{
 			services.AddScoped<INotificationHandler<ExceptionNotification>, ExceptionNotificationHandler>();
+		}
+
+		public static void RegisterIdentityService(IServiceCollection services)
+		{
+			services.AddScoped<IIdentityService, IdentityService>();
 		}
 
 		public static void RegisterEnvironments(IServiceCollection services, IConfiguration configuration)

@@ -5,6 +5,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
 {
     public interface IIdentityService
     {
+        AuthenticationResult GenerateToken(string userId, string email);
         Task<AuthenticationResult> RefreshToken(string token, string refreshToken);
     }
 }
