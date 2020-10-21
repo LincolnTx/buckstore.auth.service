@@ -22,5 +22,13 @@ namespace buckstore.auth.service.api.v1.Controllers
 
             return Response(200, userCreated);
         }
+        
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUserAsync([FromBody] LoginUserCommand loginUserCommand)
+        {
+            var loginUserInfo = await _mediator.Send(loginUserCommand);
+            
+            return Response(200, new { });
+        }
     }
 }
