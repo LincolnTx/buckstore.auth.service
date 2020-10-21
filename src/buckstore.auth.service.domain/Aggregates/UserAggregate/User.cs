@@ -11,7 +11,7 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
         public string GetName => _name;
         private string _surname;
         public string GetSurname => _surname;
-        private string _email;
+        public string _email { get;  set; }
         public string GetEmail => _email;
         private string _password;
         public string GetPassword => _password;
@@ -33,10 +33,11 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
             _cpf = cpf;
         }
         
-        // deve ser alterado
-        public bool LogInUser(string email, string password)
+        public bool VerifyUserPassword(string email, string password)
         {
-            return true;
+            var requestPasswordSalted = CreateHashPassword(password, _passwordSalt);
+
+            return String.Equals(requestPasswordSalted, _password);
         }
 
         public bool AddAddressForUserById(Address address)
