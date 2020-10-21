@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - IoC", "01 - IoC", "{99
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Identity", "02 - Identity", "{1F72FE0F-A37A-43CA-B866-99FC99D14A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.auth.service.infrastructure.CrossCutting.identity", "buckstore.auth.service.infrastructure.CrossCutting.identity\buckstore.auth.service.infrastructure.CrossCutting.identity.csproj", "{517B002E-4BA4-494F-8BBA-AD5F64FC7FD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "buckstore.auth.service.infrastructure.CrossCutting.identity", "src\buckstore.auth.service.infrastructure.CrossCutting.identity\buckstore.auth.service.infrastructure.CrossCutting.identity.csproj", "{517B002E-4BA4-494F-8BBA-AD5F64FC7FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

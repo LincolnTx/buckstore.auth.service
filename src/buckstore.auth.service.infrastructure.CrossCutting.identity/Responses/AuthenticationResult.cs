@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 
 namespace buckstore.auth.service.infrastructure.CrossCutting.identity.Responses
 {

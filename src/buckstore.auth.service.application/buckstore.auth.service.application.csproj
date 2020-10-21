@@ -12,9 +12,9 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\buckstore.auth.service.infrastructure.CrossCutting.identity\buckstore.auth.service.infrastructure.CrossCutting.identity.csproj" />
       <ProjectReference Include="..\buckstore.auth.service.domain\buckstore.auth.service.domain.csproj" />
       <ProjectReference Include="..\buckstore.auth.service.environment\buckstore.auth.service.environment.csproj" />
+      <ProjectReference Include="..\buckstore.auth.service.infrastructure.CrossCutting.identity\buckstore.auth.service.infrastructure.CrossCutting.identity.csproj" />
     </ItemGroup>
 
 </Project>
