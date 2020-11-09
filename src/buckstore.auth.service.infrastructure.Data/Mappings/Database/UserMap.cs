@@ -10,21 +10,26 @@ namespace buckstore.auth.service.infrastructure.Data.Mappings.Database
 		{
 			builder.ToTable("User");
 			
-			builder.HasIndex("_email").IsUnique();
+			// descobrir pq usar index faz o campo retornar fazio
+			/*builder.HasIndex("_email").IsUnique();
+			builder.HasIndex("_cpf").IsUnique();*/
 
 			builder.HasKey(user => user.Id);
 
-			builder.Property<string>("_name")
+			builder.Property<string>(user => user.Name)
+				.HasField("_name")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("name")
 				.IsRequired();
 			
-			builder.Property<string>("_surname")
+			builder.Property<string>(user => user.Surname)
+				.HasField("_surname")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("surname")
 				.IsRequired();
 			
-			builder.Property<string>("_email")
+			builder.Property<string>(user => user.Email)
+				.HasField("_email")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("email")
 				.IsRequired();
@@ -38,17 +43,23 @@ namespace buckstore.auth.service.infrastructure.Data.Mappings.Database
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("credCard");
 			
-			builder.Property<string>("_cpf")
+			builder.Property<string>(user => user.Cpf)
+				.HasField("_cpf")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("cpf")
 				.IsRequired();
-			
 			
 			builder.Property<byte[]>("_passwordSalt")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("passwordSalt")
 				.IsRequired();
-			
+
+			builder.Property<int>(user => user.UserType)
+				.HasField("_userType")
+				.UsePropertyAccessMode(PropertyAccessMode.Field)
+				.HasColumnName("userType")
+				.IsRequired();
+
 			builder.OwnsOne<Address>(user => user.Address, userAddress =>
 			{
 				userAddress.WithOwner();

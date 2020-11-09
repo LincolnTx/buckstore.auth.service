@@ -8,22 +8,23 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
     public class User : Entity, IAggregateRoot
     {
         private string _name;
-        public string GetName => _name;
+        public string Name => _name;
         private string _surname;
-        public string GetSurname => _surname;
-        public string _email { get;  set; }
-        public string GetEmail => _email;
+        public string Surname => _surname;
+        private string _email;
+        public string Email => _email;
         private string _password;
-        public string GetPassword => _password;
-        private string _credCard; //cred card might be a value obj
-        private string  _cpf;
-        public string GetCpf => _cpf;
-        public Address Address { get; set; }
+        private readonly string _credCard;
+        private string _cpf;
+        public string Cpf => _cpf;
+        private int _userType;
+        public int UserType => _userType;
         private byte[] _passwordSalt;
-        public byte[] GetSalt => _passwordSalt;
+        public Address Address { get; set; }
+
         protected User() { }
 
-        public User(string name, string surname, string email, string password, string cpf)
+        public User(string name, string surname, string email, string password, string cpf, int userType)
         {
             _name = name;
             _surname = surname;
@@ -31,13 +32,14 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
             _passwordSalt = GenerateSalt();
             _password = CreateHashPassword(password, _passwordSalt);
             _cpf = cpf;
+            _userType = userType;
         }
         
-        public bool VerifyUserPassword(string email, string password)
+        public bool VerifyUserPassword(string password)
         {
             var requestPasswordSalted = CreateHashPassword(password, _passwordSalt);
 
-            return String.Equals(requestPasswordSalted, _password);
+            return string.Equals(requestPasswordSalted, _password);
         }
 
         public bool AddAddressForUserById(Address address)

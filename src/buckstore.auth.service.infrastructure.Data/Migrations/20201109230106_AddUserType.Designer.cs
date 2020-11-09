@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using buckstore.auth.service.infrastructure.Data.Context;
@@ -9,9 +10,10 @@ using buckstore.auth.service.infrastructure.Data.Context;
 namespace buckstore.auth.service.infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201109230106_AddUserType")]
+    partial class AddUserType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,8 +51,14 @@ namespace buckstore.auth.service.infrastructure.Data.Migrations
                         .HasColumnName("userType")
                         .HasColumnType("integer");
 
+                    b.Property<string>("_cpf")
+                        .HasColumnType("text");
+
                     b.Property<string>("_credCard")
                         .HasColumnName("credCard")
+                        .HasColumnType("text");
+
+                    b.Property<string>("_email")
                         .HasColumnType("text");
 
                     b.Property<string>("_password")
@@ -64,6 +72,12 @@ namespace buckstore.auth.service.infrastructure.Data.Migrations
                         .HasColumnType("bytea");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("_cpf")
+                        .IsUnique();
+
+                    b.HasIndex("_email")
+                        .IsUnique();
 
                     b.ToTable("User");
                 });
