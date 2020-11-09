@@ -17,5 +17,10 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.Responses
         public bool Invalidated { get; set; }
 
         public string UserId { get; set; }
+
+        public RefreshToken()
+        {
+            Token = Guid.NewGuid().ToString();
+        }
     }
 }

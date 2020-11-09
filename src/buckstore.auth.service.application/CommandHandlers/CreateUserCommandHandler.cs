@@ -31,15 +31,15 @@ namespace buckstore.auth.service.application.CommandHandlers
                 return null;
             }
             
-            var user = new User(request.Name, request.Surname, request.Email, request.Password, request.Cpf);
+            var user = new User(request.Name, request.Surname, request.Email, request.Password, request.Cpf, UserType.Customer.Id);
             var userDto = _mapper.Map<CreateUserDto>(user);
             
             _userRepository.Add(user);
 
             if (await Commit())
             {
-                var userIntegrationEvent =new UserCreatedIntegrationEvent(userDto);
-                await _bus.Publish(userIntegrationEvent, cancellationToken);
+                //var userIntegrationEvent =new UserCreatedIntegrationEvent(userDto);
+                //await _bus.Publish(userIntegrationEvent, cancellationToken);
                 
                 return userDto;
             }

@@ -14,14 +14,14 @@ namespace buckstore.auth.service.application.IntegrationEvents.Events
         public byte[] PasswordSalt { get; }
         public string Cpf { get; }
 
-        public UserCreatedIntegrationEvent(CreateUserDto userDto)
-        {
-            UserId = userDto.Id;
-            Name = userDto.Name;
-            Email = userDto.Email;
-            Password = userDto.Password;
-            PasswordSalt = userDto.PasswordSalt;
-            Cpf = userDto.Cpf;
-        }
+        //public UserCreatedIntegrationEvent(CreateUserDto userDto)
+        //{
+        //    UserId = userDto.Id;
+        //    Name = userDto.Name;
+        //    Email = userDto.Email;
+        //    Password = userDto.Password;
+        //    PasswordSalt = userDto.PasswordSalt;
+        //    Cpf = userDto.Cpf;
+        //}
     }
 }

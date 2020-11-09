@@ -28,7 +28,7 @@ namespace buckstore.auth.service.api.v1.Controllers
         {
             var loginUserInfo = await _mediator.Send(loginUserCommand);
             
-            return Response(200, new { });
+            return Response(200, loginUserInfo);
         }
     }
 }

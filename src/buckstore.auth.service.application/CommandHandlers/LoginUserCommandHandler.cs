@@ -31,14 +31,18 @@ namespace buckstore.auth.service.application.CommandHandlers
             }
 
             var user = await _userRepository.FindUserByEmail(request.Email);
-            var isPasswordValid = user.VerifyUserPassword(request.Email, request.Password);
+            var isPasswordValid = user.VerifyUserPassword(request.Password);
 
-            if (!isPasswordValid) return null;
+            if (!isPasswordValid)
+            {
+                await _bus.Publish(new ExceptionNotification("002", "Usuário ou senha inválidos"));
+                return null;
+            }
 
-            var authenticationResult = _identityService.GenerateToken(user.Id.ToString(), user._email);
+            var authenticationResult = _identityService.GenerateToken(user);
             
             
-            return new LoginUserDto(user.GetEmail, user.GetName, 
+            return new LoginUserDto(user.Email, user.Name, 
                 authenticationResult.Token, authenticationResult.RefreshToken);
         }
     }

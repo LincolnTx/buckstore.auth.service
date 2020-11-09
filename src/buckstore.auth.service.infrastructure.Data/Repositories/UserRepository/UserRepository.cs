@@ -13,7 +13,8 @@ namespace buckstore.auth.service.infrastructure.Data.Repositories.UserRepository
 
         public async Task<User> FindUserByEmail(string email)
         {
-            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(user => user._email == email);
+            var merda = await _dbSet.AsNoTracking().FirstOrDefaultAsync(user => user.Email == email);
+            return merda;
         }
     }
 }
