@@ -30,7 +30,7 @@ namespace buckstore.auth.service.api.v1
 		{
 			services.AddSwaggerSetup();
 			services.AddAutoMapper();
-			services.AddDependencyInjectionSetup();
+			services.AddDependencyInjectionSetup(Configuration);
 			services.AddMediatR(typeof(CommandHandler));
 			services.AddScoped<GlobalExceptionFilterAttribute>();
 			services.AddDatabaseSetup();
@@ -46,10 +46,10 @@ namespace buckstore.auth.service.api.v1
 			}
 
 			app.UseHttpsRedirection();
-
+			
 			app.UseRouting();
 
-			app.UseAuthorization();
+			// app.UseAuthorization();
 			app.UseSwaggerSetup();
 
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

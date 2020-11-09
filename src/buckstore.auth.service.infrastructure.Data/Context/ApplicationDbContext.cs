@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using buckstore.auth.service.infrastructure.Data.Mappings.Database;
 
 namespace buckstore.auth.service.infrastructure.Data.Context
 {
@@ -30,17 +31,17 @@ namespace buckstore.auth.service.infrastructure.Data.Context
 			_mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 		}
 
-		// protected override void OnConfiguring(DbContextOptionsBuilder options) =>
-		// 	options.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionString"),
-		// 		npgsqlOptionsAction: pgOptions =>
-		// 		{
-		// 			pgOptions.EnableRetryOnFailure(maxRetryCount: 3, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null);
-		// 		}
-		// );
+		protected override void OnConfiguring(DbContextOptionsBuilder options) =>
+			options.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionString"),
+				npgsqlOptionsAction: pgOptions =>
+				{
+					pgOptions.EnableRetryOnFailure(maxRetryCount: 3, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null);
+				}
+		);
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			// sample: modelBuilder.ApplyConfiguration(new UserMap());
+			modelBuilder.ApplyConfiguration(new UserMap());
 
 		}
 

@@ -8,14 +8,13 @@
         <PackageReference Include="AutoMapper" Version="9.0.0" />
         <PackageReference Include="FluentValidation" Version="8.6.2" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.5" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Validations" />
+        <PackageReference Include="MongoDB.Driver" Version="2.11.3" />
     </ItemGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\buckstore.auth.service.domain\buckstore.auth.service.domain.csproj" />
+      <ProjectReference Include="..\buckstore.auth.service.environment\buckstore.auth.service.environment.csproj" />
+      <ProjectReference Include="..\buckstore.auth.service.infrastructure.CrossCutting.identity\buckstore.auth.service.infrastructure.CrossCutting.identity.csproj" />
     </ItemGroup>
 
 </Project>
