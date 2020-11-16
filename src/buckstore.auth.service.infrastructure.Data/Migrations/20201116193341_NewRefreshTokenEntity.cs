@@ -3,26 +3,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace buckstore.auth.service.infrastructure.Data.Migrations
 {
-    public partial class AddRefreshTokenTable : Migration
+    public partial class NewRefreshTokenEntity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_User_UserRefreshToken_userId",
-                table: "User");
-
-            migrationBuilder.DropIndex(
-                name: "IX_User_userId",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "userId",
-                table: "User");
-
             migrationBuilder.AddColumn<Guid>(
                 name: "refreshTokenId",
                 table: "User",
                 nullable: true);
+
+            migrationBuilder.CreateTable(
+                name: "UserRefreshToken",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    userRefreshToken = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRefreshToken", x => x.Id);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_refreshTokenId",
@@ -45,6 +45,9 @@ namespace buckstore.auth.service.infrastructure.Data.Migrations
                 name: "FK_User_UserRefreshToken_refreshTokenId",
                 table: "User");
 
+            migrationBuilder.DropTable(
+                name: "UserRefreshToken");
+
             migrationBuilder.DropIndex(
                 name: "IX_User_refreshTokenId",
                 table: "User");
@@ -52,26 +55,6 @@ namespace buckstore.auth.service.infrastructure.Data.Migrations
             migrationBuilder.DropColumn(
                 name: "refreshTokenId",
                 table: "User");
-
-            migrationBuilder.AddColumn<Guid>(
-                name: "userId",
-                table: "User",
-                type: "uuid",
-                nullable: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_userId",
-                table: "User",
-                column: "userId",
-                unique: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_User_UserRefreshToken_userId",
-                table: "User",
-                column: "userId",
-                principalTable: "UserRefreshToken",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
     }
 }

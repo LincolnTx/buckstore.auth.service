@@ -60,7 +60,7 @@ namespace buckstore.auth.service.infrastructure.Data.Mappings.Database
 				.HasColumnName("userType")
 				.IsRequired();
 
-			builder.OwnsOne<Address>(user => user.Address, userAddress =>
+            builder.OwnsOne<Address>(user => user.Address, userAddress =>
 			{
 				userAddress.WithOwner();
 			});

@@ -10,8 +10,8 @@ using buckstore.auth.service.infrastructure.Data.Context;
 namespace buckstore.auth.service.infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201116175529_AddRefreshTokenTable")]
-    partial class AddRefreshTokenTable
+    [Migration("20201116193341_NewRefreshTokenEntity")]
+    partial class NewRefreshTokenEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
