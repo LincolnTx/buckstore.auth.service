@@ -9,13 +9,15 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
 
         public UserRefreshToken(string refreshToken)
         {
+            SetId();
             _refreshToken = refreshToken;
         }
         protected UserRefreshToken() { }
 
-        public void UpdateRefreshToken(string newRefreshToken)
+        public UserRefreshToken UpdateRefreshToken(string newRefreshToken)
         {
             _refreshToken = newRefreshToken;
+            return this;
         }
     }
 }

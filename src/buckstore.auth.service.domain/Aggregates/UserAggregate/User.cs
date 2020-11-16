@@ -59,10 +59,8 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
             {
                 RefreshToken = new UserRefreshToken(refreshToken);
             }
-            else
-            {
-                RefreshToken.UpdateRefreshToken(refreshToken);
-            }
+
+            RefreshToken = RefreshToken.UpdateRefreshToken(refreshToken);
         }
 
         private  string CreateHashPassword(string password, byte [] salt)
