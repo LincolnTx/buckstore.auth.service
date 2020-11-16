@@ -40,6 +40,12 @@ namespace buckstore.auth.service.application.CommandHandlers
             }
 
             var authenticationResult = _identityService.GenerateToken(user);
+            user.SetOrUpdateUserRefreshToken(authenticationResult.RefreshToken);
+
+            if(!await Commit())
+            {
+                return null;
+            }
             
             
             return new LoginUserDto(user.Email, user.Name, 

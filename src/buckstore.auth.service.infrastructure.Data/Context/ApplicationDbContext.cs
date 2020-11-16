@@ -42,7 +42,7 @@ namespace buckstore.auth.service.infrastructure.Data.Context
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new UserMap());
-
+			modelBuilder.ApplyConfiguration(new UserRefreshTokenMap());
 		}
 
 		public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken))

@@ -63,13 +63,38 @@ namespace buckstore.auth.service.infrastructure.Data.Migrations
                         .HasColumnName("passwordSalt")
                         .HasColumnType("bytea");
 
+                    b.Property<Guid?>("userId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("userId")
+                        .IsUnique();
 
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("buckstore.auth.service.domain.Aggregates.UserAggregate.UserRefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("_refreshToken")
+                        .HasColumnName("userRefreshToken")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserRefreshToken");
+                });
+
             modelBuilder.Entity("buckstore.auth.service.domain.Aggregates.UserAggregate.User", b =>
                 {
+                    b.HasOne("buckstore.auth.service.domain.Aggregates.UserAggregate.UserRefreshToken", "RefreshToken")
+                        .WithOne()
+                        .HasForeignKey("buckstore.auth.service.domain.Aggregates.UserAggregate.User", "userId");
+
                     b.OwnsOne("buckstore.auth.service.domain.Aggregates.UserAggregate.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("UserId")
