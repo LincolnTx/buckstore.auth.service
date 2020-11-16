@@ -21,6 +21,7 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
         public int UserType => _userType;
         private byte[] _passwordSalt;
         public Address Address { get; set; }
+        public UserRefreshToken RefreshToken { get; private set; }
 
         protected User() { }
 
@@ -50,6 +51,18 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
         public bool AddCredCardForUserById(string credCardNumber)
         {
             return true;
+        }
+
+        public void SetOrUpdateUserRefreshToken(string refreshToken)
+        {
+            if (RefreshToken == null)
+            {
+                RefreshToken = new UserRefreshToken(refreshToken);
+            }
+            else
+            {
+                RefreshToken.UpdateRefreshToken(refreshToken);
+            }
         }
 
         private  string CreateHashPassword(string password, byte [] salt)

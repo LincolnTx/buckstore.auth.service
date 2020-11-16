@@ -64,6 +64,10 @@ namespace buckstore.auth.service.infrastructure.Data.Mappings.Database
 			{
 				userAddress.WithOwner();
 			});
+
+			builder.HasOne<UserRefreshToken>(user => user.RefreshToken)
+				.WithOne()
+				.HasForeignKey<User>("refreshTokenId");
 		}
 	}
 }
