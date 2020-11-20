@@ -11,6 +11,7 @@ namespace buckstore.auth.service.application.Commands
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string Cpf { get; set; }
+        public int? UserType { get; set; }
        
         public override bool IsValid()
         {
