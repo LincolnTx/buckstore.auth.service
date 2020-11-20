@@ -30,5 +30,13 @@ namespace buckstore.auth.service.api.v1.Controllers
             
             return Response(200, loginUserInfo);
         }
+
+        [HttpPost("register-employee")]
+        public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeCommand createEmployeeCommand)
+        {
+            var createEmployeeResponse = await _mediator.Send(createEmployeeCommand);
+
+            return Response(200, createEmployeeResponse);
+        }
     }
 }
