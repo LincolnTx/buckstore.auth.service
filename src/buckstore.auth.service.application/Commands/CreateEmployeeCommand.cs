@@ -1,9 +1,12 @@
 ﻿using buckstore.auth.service.application.Validations;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace buckstore.auth.service.application.Commands
 {
-    public class CreateUserCommand : Command, IRequest<CreateUserDto>
+    public class CreateEmployeeCommand : Command, IRequest<CreateUserDto>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -11,11 +14,9 @@ namespace buckstore.auth.service.application.Commands
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string Cpf { get; set; }
-        public int? UserType { get; set; }
-       
         public override bool IsValid()
         {
-            ValidationResult = new CreateUserValidations().Validate(this);
+            ValidationResult = new CreateEmployeeValidations().Validate(this);
 
             return ValidationResult.IsValid;
         }
