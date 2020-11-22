@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Threading;
 
 namespace buckstore.auth.service.api.v1.Filters.AuthorizationFilters
 {
@@ -36,6 +37,14 @@ namespace buckstore.auth.service.api.v1.Filters.AuthorizationFilters
             string token = !(String.IsNullOrEmpty(authHeader)) ? authHeader.Replace("Bearer ", "") : "";
             try
             {
+                if (! _identityService.ValidateToken(token))
+                {
+                    _logger.LogWarning("Usuário passou um token inválido na rota {0}.", context.HttpContext.Request.Path);
+                    context.Result = new UnauthorizedResult();
+                    await context.Result.ExecuteResultAsync(context);
+                    return;
+                }
+
                 var tokenClaims = _identityService.GetTokenClaims(token);
                 var userRole = tokenClaims.FirstOrDefault(claim => claim.Type == "Role");
 
@@ -45,6 +54,7 @@ namespace buckstore.auth.service.api.v1.Filters.AuthorizationFilters
                 {
                     context.Result = new UnauthorizedResult();
                     await context.Result.ExecuteResultAsync(context);
+                    _logger.LogWarning("Usuário passou um  token sem acesso na rota {0}.", context.HttpContext.Request.Path);
                 }
                 else
                 {
@@ -54,6 +64,7 @@ namespace buckstore.auth.service.api.v1.Filters.AuthorizationFilters
             catch (ArgumentNullException)
             {
                 context.Result = new UnauthorizedResult();
+                _logger.LogWarning("Usuário não passou um token na rota {0}", context.HttpContext.Request.Path);
             }
         }
     }
