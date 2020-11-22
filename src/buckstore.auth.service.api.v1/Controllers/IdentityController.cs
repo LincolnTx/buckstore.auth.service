@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using buckstore.auth.service.api.v1.Filters.AuthorizationFilters;
 using buckstore.auth.service.application.Commands;
 using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using buckstore.auth.service.domain.Exceptions;
@@ -26,6 +27,7 @@ namespace buckstore.auth.service.api.v1.Controllers
         }
 
         [HttpPost("register-employee")]
+        [Authorize(nameof(UserType.Admin))]
         public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeCommand createEmployeeCommand)
         {
             var createEmployeeResponse = await _mediator.Send(createEmployeeCommand);
@@ -34,6 +36,7 @@ namespace buckstore.auth.service.api.v1.Controllers
         }
 
         [HttpPost("register-admin")]
+        [Authorize(nameof(UserType.Admin))]
         public async Task<IActionResult> CreateAdmin([FromBody] CreateUserCommand createAdminCommand)
         {
             createAdminCommand.UserType = UserType.Admin.Id;
