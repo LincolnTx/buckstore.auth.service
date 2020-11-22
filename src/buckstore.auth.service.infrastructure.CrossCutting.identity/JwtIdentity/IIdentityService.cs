@@ -9,6 +9,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
     public interface IIdentityService
     {
         AuthenticationResult GenerateToken(User user);
+        bool ValidateToken(string token);
         Task<AuthenticationResult> RefreshToken(string token, string refreshToken);
         IEnumerable<Claim> GetTokenClaims(string token);
     }

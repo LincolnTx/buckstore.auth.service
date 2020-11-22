@@ -35,7 +35,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
                 new Claim("id", user.Id.ToString()),
             };
 
-            claims.Add(new Claim("UserType", user.UserType.ToString(), "xs:integer"));
+            claims.Add(new Claim("Role", UserType.From(user.UserType).Name));
             
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -82,6 +82,30 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
 
             var tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
             return tokenValid.Claims;
+        }
+
+        public bool ValidateToken(string token)
+        {
+            var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                IssuerSigningKey = new SymmetricSecurityKey(key)
+            };
+
+            var jwtSecutiryTokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                jwtSecutiryTokenHandler.ValidateToken(token, tokenValidationParameters, out var validatedToken);
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+
+            
         }
     }
 }
