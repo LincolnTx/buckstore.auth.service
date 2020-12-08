@@ -46,7 +46,7 @@ namespace buckstore.auth.service.application.CommandHandlers
 
             var authenticationResult = _identityService.GenerateToken(user);
             
-            return new LoginUserDto(user.Email, user.Name, 
+            return new LoginUserDto(user.Email, user.Name, user.Surname,
                 authenticationResult.Token, authenticationResult.RefreshToken);
         }
     }

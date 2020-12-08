@@ -39,12 +39,6 @@ namespace buckstore.auth.service.application.Validations
             RuleFor(createUser => createUser.Password)
                 .NotEmpty().WithMessage("Campo senha obrigatório").WithErrorCode("005")
                 .MinimumLength(6).WithMessage("A senha deve ter no mínimo 6 caratcetres").WithErrorCode("006");
-
-            RuleFor(createUser => createUser).Custom((createUser, context) =>
-            {
-                if (!string.Equals(createUser.Password, createUser.ConfirmPassword))
-                    context.AddFailure(nameof(createUser.Password), "As senhas devem ser iguais");
-            });
         }
 
         protected void ValidateCpf()
