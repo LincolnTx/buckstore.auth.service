@@ -52,6 +52,14 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
             return true;
         }
 
+        public void ChangePassword(string newPassword)
+        {
+            var saltForNewPassword = GenerateSalt();
+
+            _password = CreateHashPassword(newPassword, saltForNewPassword);
+            _passwordSalt = saltForNewPassword;
+        }
+
         private  string CreateHashPassword(string password, byte [] salt)
         {
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(

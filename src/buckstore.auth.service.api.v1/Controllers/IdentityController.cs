@@ -52,5 +52,13 @@ namespace buckstore.auth.service.api.v1.Controllers
             
             return Response(200, loginUserInfo);
         }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangeUserPasswordAsync([FromBody] ChangeUserPasswordCommand changePasswordCommand)
+        {
+            var changedPassword = await _mediator.Send(changePasswordCommand);
+
+            return Response(200, changedPassword);
+        }
     }
 }

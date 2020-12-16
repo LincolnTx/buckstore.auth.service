@@ -15,15 +15,15 @@ namespace buckstore.auth.service.application.Validations
         protected void ValidateEmail()
         {
             RuleFor(login => login.Email)
-                .NotEmpty().WithMessage("Campo email obrigatório").WithErrorCode("001")
-                .EmailAddress().WithMessage("O campo precisa ser um email válido").WithErrorCode("002");
+                .NotEmpty().WithMessage("Campo email obrigatório").WithErrorCode("009")
+                .EmailAddress().WithMessage("O campo precisa ser um email válido").WithErrorCode("010");
         }
 
         protected void ValidatePassword()
         {
             RuleFor(login => login.Password)
                 .NotEmpty().WithMessage("Campo senha é obrigatório").WithErrorCode("003")
-                .MinimumLength(6).WithMessage("A senha deve ter no mínimo 6 caratcetres").WithErrorCode("004");
+                .MinimumLength(6).WithMessage("A senha deve ter no mínimo 6 caratcetres").WithErrorCode("011");
         }
     }
 }
