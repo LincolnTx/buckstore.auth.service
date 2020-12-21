@@ -4,6 +4,7 @@ using buckstore.auth.service.domain.Exceptions;
 using buckstore.auth.service.domain.SeedWork;
 using buckstore.auth.service.environment.Configuration;
 using buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentity;
+using buckstore.auth.service.infrastructure.CrossCutting.identity.OAuthIdentity.Facebook;
 using buckstore.auth.service.infrastructure.Data.Context;
 using buckstore.auth.service.infrastructure.Data.Repositories.UserRepository;
 using buckstore.auth.service.infrastructure.Data.UnitOfWork;
@@ -44,13 +45,14 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC
 		public static void RegisterIdentityService(IServiceCollection services)
 		{
 			services.AddScoped<IIdentityService, IdentityService>();
+			services.AddScoped<IFacebookIdendity, FacebookIdendity>();
 		}
 
 		public static void RegisterEnvironments(IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddSingleton(configuration.GetSection("AppConfigurations").Get<AppConfigurations>());
 			services.AddSingleton(configuration.GetSection("JwtSettings").Get<JwtSettings>());
-			
+			services.AddSingleton(configuration.GetSection("FacebookSettings").Get<FacebookSettings>());
 		}
 	}
 }

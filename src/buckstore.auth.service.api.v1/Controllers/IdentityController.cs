@@ -60,5 +60,13 @@ namespace buckstore.auth.service.api.v1.Controllers
 
             return Response(200, changedPassword);
         }
+
+        [HttpPost("facebook-login")]
+        public async Task<IActionResult> FacebookLogin([FromBody] LoginUserCommand loginUserCommand)
+        {
+            var loginUserInfo = await _mediator.Send(loginUserCommand);
+
+            return Response(200, loginUserInfo);
+        }
     }
 }
