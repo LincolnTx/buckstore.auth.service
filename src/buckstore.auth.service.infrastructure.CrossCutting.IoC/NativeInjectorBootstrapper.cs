@@ -45,7 +45,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC
 		public static void RegisterIdentityService(IServiceCollection services)
 		{
 			services.AddScoped<IIdentityService, IdentityService>();
-			services.AddScoped<IFacebookIdendity, FacebookIdendity>();
+			services.AddHttpClient<IFacebookIdendity, FacebookIdendity>();
 		}
 
 		public static void RegisterEnvironments(IServiceCollection services, IConfiguration configuration)
