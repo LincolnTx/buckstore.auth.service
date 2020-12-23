@@ -33,26 +33,23 @@ namespace buckstore.auth.service.infrastructure.Data.Mappings.Database
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("email")
 				.IsRequired();
-			
+
 			builder.Property<string>("_password")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
-				.HasColumnName("password")
-				.IsRequired();
+				.HasColumnName("password");
 			
 			builder.Property<string>("_credCard")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("credCard");
-			
+
 			builder.Property<string>(user => user.Cpf)
 				.HasField("_cpf")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
-				.HasColumnName("cpf")
-				.IsRequired();
-			
+				.HasColumnName("cpf");
+
 			builder.Property<byte[]>("_passwordSalt")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
-				.HasColumnName("passwordSalt")
-				.IsRequired();
+				.HasColumnName("passwordSalt");
 
 			builder.Property<int>(user => user.UserType)
 				.HasField("_userType")

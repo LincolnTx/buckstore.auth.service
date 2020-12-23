@@ -31,7 +31,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.OAuthIdent
             }
             catch (HttpRequestException httpException)
             {
-                _logger.LogError("Erro ao buscar informações do usuário do facebook", e.Message);
+                _logger.LogError("Erro ao buscar informações do usuário do facebook", httpException.Message);
                 throw httpException;
             }
         }
@@ -48,7 +48,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.OAuthIdent
             }
             catch (HttpRequestException httpException )
             {
-                _logger.LogError("Erro ao realizar confirmação de token do Facebook Auth", e.Message);
+                _logger.LogError("Erro ao realizar confirmação de token do Facebook Auth", httpException.Message);
                 throw httpException;
             }
         }

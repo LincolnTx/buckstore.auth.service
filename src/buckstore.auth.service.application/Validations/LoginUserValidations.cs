@@ -1,5 +1,4 @@
-﻿using System.Data;
-using buckstore.auth.service.application.Commands;
+﻿using buckstore.auth.service.application.Commands;
 using FluentValidation;
 
 namespace buckstore.auth.service.application.Validations

@@ -34,7 +34,15 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
             _cpf = cpf;
             _userType = userType;
         }
-        
+        public User(string name, string surname, string email, int userType)
+        {
+            _name = name;
+            _surname = surname;
+            _email = email;
+            _password = string.Empty;
+            _userType = userType;
+        }
+
         public bool VerifyUserPassword(string password)
         {
             var requestPasswordSalted = CreateHashPassword(password, _passwordSalt);

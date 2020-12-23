@@ -62,7 +62,7 @@ namespace buckstore.auth.service.api.v1.Controllers
         }
 
         [HttpPost("facebook-login")]
-        public async Task<IActionResult> FacebookLogin([FromBody] LoginUserCommand loginUserCommand)
+        public async Task<IActionResult> FacebookLogin([FromBody] FacebookLoginCommand loginUserCommand)
         {
             var loginUserInfo = await _mediator.Send(loginUserCommand);
 
