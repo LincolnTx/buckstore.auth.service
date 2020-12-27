@@ -28,13 +28,6 @@ namespace buckstore.auth.service.api.v1
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddCors(options => options.AddPolicy("AllowCors", builder =>
-			{
-				builder.WithOrigins("*")
-						.WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
-						.AllowAnyHeader();
-			}));
-
 			services.AddSwaggerSetup();
 			services.AddAutoMapper();
 			services.AddDependencyInjectionSetup(Configuration);
@@ -52,7 +45,9 @@ namespace buckstore.auth.service.api.v1
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseHttpsRedirection();
+			//app.UseHttpsRedirection();
+
+			app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 			
 			app.UseRouting();
 
