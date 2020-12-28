@@ -27,7 +27,8 @@ namespace buckstore.auth.service.application.CommandHandlers
                 return null;
             }
 
-            var user = new User(request.Name, request.Surname, request.Email, request.Password, request.Cpf,UserType.Employee.Id);
+            var user = new User(request.Name, request.Surname, request.Email, request.Password, UserType.Employee.Id);
+            user.AddUserCpf(request.Cpf);
             var userDto = _mapper.Map<CreateUserDto>(user);
 
             _userRespository.Add(user);

@@ -24,14 +24,13 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
 
         protected User() { }
 
-        public User(string name, string surname, string email, string password, string cpf, int userType)
+        public User(string name, string surname, string email, string password, int userType)
         {
             _name = name;
             _surname = surname;
             _email = email;
             _passwordSalt = GenerateSalt();
             _password = CreateHashPassword(password, _passwordSalt);
-            _cpf = cpf;
             _userType = userType;
         }
         public User(string name, string surname, string email, int userType)
@@ -41,6 +40,11 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
             _email = email;
             _password = string.Empty;
             _userType = userType;
+        }
+
+        public void AddUserCpf(string cpf)
+        {
+            _cpf = cpf;
         }
 
         public bool VerifyUserPassword(string password)
