@@ -13,8 +13,8 @@ Desenvolvido  por
 ### Outros repositórios desse projeto
 Frontdend: [BuckStore Fronted](https://github.com/LincolnTx/buckstore-frontend)
 
-Api1: [BuckStore Manager](https://github.com/LincolnTx/buckstore.manager.service)
+Manager Api: [BuckStore Manager](https://github.com/LincolnTx/buckstore.manager.service)
 
-Api2: [BuckStore Products](https://github.com/LincolnTx/buckstore.products.service)
+Products Api: [BuckStore Products](https://github.com/LincolnTx/buckstore.products.service)
 
-Api3: [BuckStore Orders](https://github.com/LincolnTx/buckstore.orders.service)
+Orders Api: [BuckStore Orders](https://github.com/LincolnTx/buckstore.orders.service)
