@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using buckstore.auth.service.environment.Configuration;
 using buckstore.auth.service.infrastructure.CrossCutting.identity.Responses;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentity
@@ -14,12 +15,12 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
     public class IdentityService : IIdentityService
     {
         private readonly JwtSettings _jwtSettings;
-        // private readonly TokenValidationParameters _tokenValidationParameters;
+        private readonly ILogger<IdentityService> _logger;
 
-        public IdentityService(JwtSettings jwtSettings)
+        public IdentityService(JwtSettings jwtSettings, ILogger<IdentityService> logger)
         {
             _jwtSettings = jwtSettings;
-            // _tokenValidationParameters = tokenValidationParameters;
+            _logger = logger;
         }
 
          public AuthenticationResult GenerateToken(User user)
@@ -42,7 +43,9 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.Add(_jwtSettings.TokenLifetime),
                 SigningCredentials =
-                    new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                    new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Issuer = _jwtSettings.TokenIssuer,
+                Audience = _jwtSettings.Audience
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -73,7 +76,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
             var tokenValidationParameters = new TokenValidationParameters()
             {
-                ValidateIssuer = false,
+                ValidateIssuer = true,
                 ValidateAudience = false,
                 IssuerSigningKey = new SymmetricSecurityKey(key)
             };
@@ -89,7 +92,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
             var tokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = false,
+                ValidateIssuer = true,
                 ValidateAudience = false,
                 IssuerSigningKey = new SymmetricSecurityKey(key)
             };
@@ -100,12 +103,11 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
                 jwtSecutiryTokenHandler.ValidateToken(token, tokenValidationParameters, out var validatedToken);
                 return true;
             }
-            catch(Exception)
+            catch (Exception e)
             {
+                _logger.LogError("Erro ao validar token jwt {0}", e);
                 return false;
             }
-
-            
         }
     }
 }
