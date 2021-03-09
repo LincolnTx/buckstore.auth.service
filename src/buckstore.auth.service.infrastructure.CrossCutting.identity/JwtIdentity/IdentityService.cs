@@ -78,6 +78,8 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
             {
                 ValidateIssuer = true,
                 ValidateAudience = false,
+                ValidIssuer = _jwtSettings.TokenIssuer,
+                ValidAudience = _jwtSettings.Audience,
                 IssuerSigningKey = new SymmetricSecurityKey(key)
             };
 
@@ -94,6 +96,8 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
             {
                 ValidateIssuer = true,
                 ValidateAudience = false,
+                ValidIssuer = _jwtSettings.TokenIssuer,
+                ValidAudience = _jwtSettings.Audience,
                 IssuerSigningKey = new SymmetricSecurityKey(key)
             };
 
