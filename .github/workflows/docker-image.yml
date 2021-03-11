@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+           docker login -u ${DOCKERHUBUSER} -p ${DOCKERHUBPASS}
+           git tag latest
+           git push origin --tags
+           docker push buckstore.auth:latest
+    env: 
+      DOCKERHUBUSER: ${{secrets.DOCKERHUBUSER}}
+      DOCKERHUBPASS: ${{secrets.DOCKERHUBPASS}}
