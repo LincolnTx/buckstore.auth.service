@@ -21,10 +21,10 @@ jobs:
         uses: docker/login-action@v1 
 
         with:
+        
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
 
-          username: ${{ secrets.DOCKERHUBUSER }}
-
-          password: ${{ secrets.DOCKERHUBPASS }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       -
 
