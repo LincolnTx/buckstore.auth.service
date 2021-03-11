@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --buckstore.auth:latest
+        docker build . --file Dockerfile --tag buckstore.auth:latest
         docker login -u ${DOCKERHUBUSER} -p ${DOCKERHUBPASS}
         git tag latest
         git push origin --tags
