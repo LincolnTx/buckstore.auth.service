@@ -10,7 +10,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    
+  
   steps:
 
     - name: Check Out Repo 
@@ -37,5 +37,4 @@ jobs:
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
-      
         run: echo ${{ steps.docker_build.outputs.digest }}
