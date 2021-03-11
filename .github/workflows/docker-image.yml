@@ -35,5 +35,5 @@ jobs:
         push: true
         tags: lincolntx/bucstore.auth:latest
 
-      - name: Image digest
+    - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
