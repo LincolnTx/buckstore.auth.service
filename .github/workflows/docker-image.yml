@@ -16,10 +16,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag buckstore.auth:$(date +%s)
+        docker build . --file Dockerfile --tag buckstore.auth
         git tag $(date +%s)
         git push origin --tags
-        docker push buckstore.auth:$(date +%s)
+        docker push buckstore.auth
       env: 
         DOCKERHUBUSER: ${{secrets.DOCKERHUBUSER}}
         DOCKERHUBPASS: ${{secrets.DOCKERHUBPASS}}
