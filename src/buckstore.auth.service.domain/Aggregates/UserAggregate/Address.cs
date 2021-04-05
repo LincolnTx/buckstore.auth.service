@@ -4,11 +4,11 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
 {
     public class Address : ValueObject
     {
-        private string _street;
-        private string _zipCode;
-        private string _district;
-        private string _city;
-        private string _state;
+        public  string _street {get; private set;}
+        public  string _zipCode {get; private set;}
+        public  string _district {get; private set;}
+        public  string _city {get; private set;}
+        public  string _state {get; private set;}
 
         public Address() { }
 

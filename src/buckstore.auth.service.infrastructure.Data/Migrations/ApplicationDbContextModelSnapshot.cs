@@ -72,6 +72,21 @@ namespace buckstore.auth.service.infrastructure.Data.Migrations
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uuid");
 
+                            b1.Property<string>("_city")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("_district")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("_state")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("_street")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("_zipCode")
+                                .HasColumnType("text");
+
                             b1.HasKey("UserId");
 
                             b1.ToTable("User");
