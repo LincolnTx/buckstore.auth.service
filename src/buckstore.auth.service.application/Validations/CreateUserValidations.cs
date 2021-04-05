@@ -11,7 +11,6 @@ namespace buckstore.auth.service.application.Validations
             ValidateSurname();
             ValidateEmail();
             ValidatePassword();
-            //ValidateCpf();
         }
 
         protected void ValidateName()
@@ -39,13 +38,5 @@ namespace buckstore.auth.service.application.Validations
                 .NotEmpty().WithMessage("Campo senha obrigatório").WithErrorCode("005")
                 .MinimumLength(6).WithMessage("A senha deve ter no mínimo 6 caratcetres").WithErrorCode("006");
         }
-        
-        //protected void ValidateCpf()
-        //{
-        //    RuleFor(createUser => createUser.Cpf)
-        //        .NotEmpty().WithMessage("Campo cpf obrigatório").WithErrorCode("007")
-        //        .MinimumLength(11).MaximumLength(11)
-        //        .WithMessage("Cpf deve ter exatemente 11 caracteres").WithErrorCode("008");
-        //}
     }
 }
