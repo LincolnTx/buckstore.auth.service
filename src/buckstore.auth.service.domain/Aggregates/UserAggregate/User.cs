@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using buckstore.auth.service.domain.Exceptions;
 using buckstore.auth.service.domain.SeedWork;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
@@ -14,7 +15,8 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
         private string _email;
         public string Email => _email;
         private string _password;
-        private readonly string _credCard;
+        private string _credCard;
+        public string CredCard => _credCard;
         private string _cpf;
         public string Cpf => _cpf;
         private int _userType;
@@ -44,9 +46,21 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
 
         public void AddUserCpf(string cpf)
         {
-            _cpf = cpf;
+            if (string.IsNullOrEmpty(_cpf))
+            {
+                _cpf = cpf;
+            }
+
+            if (_cpf != cpf)
+            {
+                throw new DomainException("Não é possível alterar o CPF");
+            }
         }
 
+        public bool UserInformationSet()
+        {
+            return !string.IsNullOrEmpty(_cpf) && !string.IsNullOrEmpty(_credCard);
+        }
         public bool VerifyUserPassword(string password)
         {
             var requestPasswordSalted = CreateHashPassword(password, _passwordSalt);
@@ -59,9 +73,17 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
             return true;
         }
 
-        public bool AddCredCardForUserById(string credCardNumber)
+        public void AddCredCardForUser(string credCardNumber)
         {
-            return true;
+            if (string.IsNullOrEmpty(_credCard))
+            {
+                _credCard = credCardNumber;
+            }
+
+            if (_credCard != credCardNumber)
+            {
+                throw new DomainException("Parar alterar o cartão cadastrado, use as opções em minha conta");
+            }
         }
 
         public void ChangePassword(string newPassword)

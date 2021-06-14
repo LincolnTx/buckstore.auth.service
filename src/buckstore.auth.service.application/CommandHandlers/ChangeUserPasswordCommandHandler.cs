@@ -38,8 +38,9 @@ namespace buckstore.auth.service.application.CommandHandlers
 
             if (! await Commit())
             {
-                await _bus.Publish(new ExceptionNotification("004", "Erro ao trocar sua senha, tente novamente mais tarde!"));
-                
+                await _bus.Publish(new ExceptionNotification("004", 
+                    "Erro ao trocar sua senha, tente novamente mais tarde!"), 
+                    cancellationToken);
                 return false;
             }
 
