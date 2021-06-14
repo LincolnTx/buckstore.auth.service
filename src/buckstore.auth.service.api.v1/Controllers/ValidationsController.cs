@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using MediatR;
 using System.Threading.Tasks;
 using buckstore.auth.service.application.Commands;
@@ -29,9 +30,11 @@ namespace buckstore.auth.service.api.v1.Controllers
         [HttpPost("provide-additional-info")]
         public async Task<IActionResult> ProvideBuyAdditionalInfo([FromBody] UserAdditionalInfoCommand userInfoCommand)
         {
+            var userId = GetTokenClaim("id");
+            userInfoCommand.UserId = Guid.Parse(userId);
             var response = await _bus.Send(userInfoCommand);
 
-            return Response(200, response);
+            return Response(204, response);
         }
     }
 }
