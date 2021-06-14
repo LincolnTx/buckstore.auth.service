@@ -38,7 +38,8 @@ namespace buckstore.auth.service.infrastructure.Data.Mappings.Database
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("password");
 			
-			builder.Property<string>("_credCard")
+			builder.Property<string>(user => user.CredCard)
+				.HasField("_credCard")
 				.UsePropertyAccessMode(PropertyAccessMode.Field)
 				.HasColumnName("credCard");
 
