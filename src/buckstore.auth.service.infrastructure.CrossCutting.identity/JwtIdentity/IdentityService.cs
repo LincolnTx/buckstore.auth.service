@@ -37,7 +37,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
             };
 
             claims.Add(new Claim("Role", UserType.From(user.UserType).Name));
-            
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),

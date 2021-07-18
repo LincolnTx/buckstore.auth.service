@@ -1,7 +1,7 @@
 using System;
+using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 
 namespace buckstore.auth.service.infrastructure.CrossCutting.IoC.Configurations
 {
@@ -15,13 +15,13 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.IoC.Configurations
 				s.SwaggerDoc("v1", new OpenApiInfo
 				{
 					Version = "v1",
-					Title = "Your Api Name",
-					Description = "Some description",
+					Title = "Authentication Api",
+					Description = "",
 					Contact = new OpenApiContact { Name = "Lincoln", Email = "lincolnsf98@gmail.com" }
 				});
 			});
 		}
-		
+
 		public static void UseSwaggerSetup(this IApplicationBuilder app)
 		{
 			if (app == null) throw new ArgumentNullException(nameof(app));

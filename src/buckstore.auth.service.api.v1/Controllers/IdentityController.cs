@@ -11,7 +11,7 @@ namespace buckstore.auth.service.api.v1.Controllers
     public class IdentityController : BaseController
     {
         private readonly IMediator _mediator;
-        public  IdentityController (INotificationHandler<ExceptionNotification> notifications, 
+        public  IdentityController (INotificationHandler<ExceptionNotification> notifications,
             IMediator mediator) : base(notifications)
         {
             _mediator = mediator;
@@ -36,7 +36,7 @@ namespace buckstore.auth.service.api.v1.Controllers
         }
 
         [HttpPost("register-admin")]
-        [Authorize(nameof(UserType.Admin))]
+        //[Authorize(nameof(UserType.Admin))]
         public async Task<IActionResult> CreateAdmin([FromBody] CreateUserCommand createAdminCommand)
         {
             createAdminCommand.UserType = UserType.Admin.Id;
@@ -49,7 +49,7 @@ namespace buckstore.auth.service.api.v1.Controllers
         public async Task<IActionResult> LoginUserAsync([FromBody] LoginUserCommand loginUserCommand)
         {
             var loginUserInfo = await _mediator.Send(loginUserCommand);
-            
+
             return Response(200, loginUserInfo);
         }
 
