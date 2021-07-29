@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using buckstore.auth.service.domain.Aggregates.UserAggregate;
-using buckstore.auth.service.environment.Configuration;
-using buckstore.auth.service.infrastructure.CrossCutting.identity.Responses;
+using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using buckstore.auth.service.environment.Configuration;
+using buckstore.auth.service.domain.Aggregates.UserAggregate;
+using buckstore.auth.service.infrastructure.CrossCutting.identity.Responses;
 
 namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentity
 {
@@ -38,17 +38,15 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
 
             claims.Add(new Claim("Role", UserType.From(user.UserType).Name));
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.Add(_jwtSettings.TokenLifetime),
-                SigningCredentials =
-                    new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-                Issuer = _jwtSettings.TokenIssuer,
-                Audience = _jwtSettings.Audience
-            };
+            var credentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature);
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var token = new JwtSecurityToken(_jwtSettings.TokenIssuer,
+                                            _jwtSettings.Audience,
+                                            claims,
+                                            signingCredentials: credentials,
+                                            expires: DateTime.UtcNow.Add(_jwtSettings.TokenLifetime));
+
 
             var refreshToken = new RefreshToken
             {
@@ -95,16 +93,19 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
+                ValidateIssuerSigningKey = true,
                 ValidateAudience = false,
+                ValidateLifetime = false,
+                RequireExpirationTime = false,
                 ValidIssuer = _jwtSettings.TokenIssuer,
                 ValidAudience = _jwtSettings.Audience,
                 IssuerSigningKey = new SymmetricSecurityKey(key)
             };
 
-            var jwtSecutiryTokenHandler = new JwtSecurityTokenHandler();
+            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             try
             {
-                jwtSecutiryTokenHandler.ValidateToken(token, tokenValidationParameters, out var validatedToken);
+                jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out var validatedToken);
                 return true;
             }
             catch (Exception e)

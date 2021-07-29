@@ -1,11 +1,10 @@
-﻿using buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Filters;
+using buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentity;
 
 namespace buckstore.auth.service.api.v1.Filters.AuthorizationFilters
 {
@@ -61,10 +60,10 @@ namespace buckstore.auth.service.api.v1.Filters.AuthorizationFilters
                     await next();
                 }
             }
-            catch (ArgumentNullException)
+            catch (ArgumentNullException e)
             {
                 context.Result = new UnauthorizedResult();
-                _logger.LogWarning("Usuário não passou um token na rota {0}", context.HttpContext.Request.Path);
+                _logger.LogWarning("Usuário não passou um token na rota {0}, erro {1}", context.HttpContext.Request.Path, e.Message);
             }
         }
     }
