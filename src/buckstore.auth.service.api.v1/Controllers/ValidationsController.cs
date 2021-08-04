@@ -2,6 +2,7 @@
 using System.Net;
 using MediatR;
 using System.Threading.Tasks;
+using buckstore.auth.service.api.v1.Filters.AuthorizationFilters;
 using buckstore.auth.service.application.Commands;
 using Microsoft.AspNetCore.Mvc;
 using buckstore.auth.service.domain.Exceptions;
@@ -12,12 +13,12 @@ namespace buckstore.auth.service.api.v1.Controllers
     public class ValidationsController : BaseController
     {
         private readonly IMediator _bus;
-        public ValidationsController(INotificationHandler<ExceptionNotification> notifications, IMediator bus) 
+        public ValidationsController(INotificationHandler<ExceptionNotification> notifications, IMediator bus)
             : base(notifications)
         {
             _bus = bus;
         }
-        
+
         [HttpGet("buy-requirements")]
         public async Task<IActionResult> AbleToBuyValidation()
         {
@@ -27,6 +28,7 @@ namespace buckstore.auth.service.api.v1.Controllers
             return Response(200, response);
         }
 
+        [Authorize]
         [HttpPost("provide-additional-info")]
         public async Task<IActionResult> ProvideBuyAdditionalInfo([FromBody] UserAdditionalInfoCommand userInfoCommand)
         {

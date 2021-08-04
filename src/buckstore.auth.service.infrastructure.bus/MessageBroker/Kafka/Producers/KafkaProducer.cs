@@ -5,11 +5,11 @@ using buckstore.auth.service.application.IntegrationEvents.Events;
 
 namespace buckstore.auth.service.infrastructure.bus.MessageBroker.Kafka.Producers
 {
-    public abstract class KafkaProducer<TEvent> : IMessageProducer<TEvent> where TEvent : IntegrationEvent
+    public class KafkaProducer<TEvent> : IMessageProducer<TEvent> where TEvent : IntegrationEvent
     {
         private readonly ITopicProducer<TEvent> _topicProducer;
 
-        protected KafkaProducer(ITopicProducer<TEvent> topicProducer)
+        public KafkaProducer(ITopicProducer<TEvent> topicProducer)
         {
             _topicProducer = topicProducer;
         }

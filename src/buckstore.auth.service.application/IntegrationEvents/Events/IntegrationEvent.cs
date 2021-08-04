@@ -5,15 +5,9 @@ namespace buckstore.auth.service.application.IntegrationEvents.Events
 {
     public class IntegrationEvent: INotification
     {
-        public IntegrationEvent()
+        public IntegrationEvent(DateTime createDate)
         {
             Id = Guid.NewGuid();
-            CreationDate = DateTime.UtcNow;
-        }
-
-        public IntegrationEvent(Guid id, DateTime createDate)
-        {
-            Id = id;
             CreationDate = createDate;
         }
 
