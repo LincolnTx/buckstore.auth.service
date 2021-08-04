@@ -1,10 +1,11 @@
-﻿using System.Threading;
+﻿using MediatR;
+using System.Threading;
 using System.Threading.Tasks;
 using buckstore.auth.service.application.Commands;
+using buckstore.auth.service.application.IntegrationEvents.Events;
 using buckstore.auth.service.domain.Aggregates.UserAggregate;
 using buckstore.auth.service.domain.Exceptions;
 using buckstore.auth.service.domain.SeedWork;
-using MediatR;
 
 namespace buckstore.auth.service.application.CommandHandlers
 {
@@ -25,18 +26,20 @@ namespace buckstore.auth.service.application.CommandHandlers
             }
 
             var user = await _userRepository.FindUserById(request.UserId);
-            
+
             if (user.UserInformationSet())
                 return Unit.Value;
-            
+
             user.AddUserCpf(request.Cpf);
-            user.AddCredCardForUser(request.CredCard);
+            //user.AddCredCardForUser(request.CredCard);
 
             if (!await Commit())
                 await _bus.Publish(new ExceptionNotification("005",
                     "Erro ao adicionar informações do usuário, tente novamente mais tarde!"),
                     cancellationToken);
-                
+
+            await _bus.Publish(new BuyerCreatedIntegrationEvent(user.Name, user.Cpf), cancellationToken);
+
             return Unit.Value;
         }
     }

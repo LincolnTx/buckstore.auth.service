@@ -24,7 +24,7 @@ namespace buckstore.auth.service.application.Validations
 
         private void ValidateCredCard()
         {
-            RuleFor(command => command.CredCard);
+            //RuleFor(command => command.CredCard);
         }
     }
 }
