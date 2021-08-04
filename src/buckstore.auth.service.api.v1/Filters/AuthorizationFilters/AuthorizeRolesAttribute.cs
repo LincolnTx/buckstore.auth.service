@@ -47,7 +47,7 @@ namespace buckstore.auth.service.api.v1.Filters.AuthorizationFilters
                 var tokenClaims = _identityService.GetTokenClaims(token);
                 var userRole = tokenClaims.FirstOrDefault(claim => claim.Type == "Role");
 
-                var isRoleValid = _roles.Contains(userRole.Value);
+                var isRoleValid = _roles.Contains(userRole.Value) || _roles.Length == 0;
 
                 if (!isRoleValid)
                 {
