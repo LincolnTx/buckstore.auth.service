@@ -38,7 +38,7 @@ namespace buckstore.auth.service.application.CommandHandlers
                     "Erro ao adicionar informações do usuário, tente novamente mais tarde!"),
                     cancellationToken);
 
-            await _bus.Publish(new BuyerCreatedIntegrationEvent(user.Name, user.Cpf), cancellationToken);
+            await _bus.Publish(new BuyerCreatedIntegrationEvent(user.Name, user.Cpf, user.Id), cancellationToken);
 
             return Unit.Value;
         }
