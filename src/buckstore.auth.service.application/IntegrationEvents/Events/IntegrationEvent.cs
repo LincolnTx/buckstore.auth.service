@@ -1,8 +1,9 @@
 ﻿using System;
+using MediatR;
 
 namespace buckstore.auth.service.application.IntegrationEvents.Events
 {
-    public class IntegrationEvent
+    public class IntegrationEvent: INotification
     {
         public IntegrationEvent()
         {
