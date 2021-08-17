@@ -36,7 +36,7 @@ namespace buckstore.auth.service.api.v1.Controllers
             userInfoCommand.UserId = Guid.Parse(userId);
             var response = await _bus.Send(userInfoCommand);
 
-            return Response(204, response);
+            return Response(204);
         }
     }
 }
