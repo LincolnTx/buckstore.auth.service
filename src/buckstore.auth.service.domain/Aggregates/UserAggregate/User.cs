@@ -50,8 +50,7 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
             {
                 _cpf = cpf;
             }
-
-            if (_cpf != cpf)
+            else
             {
                 throw new DomainException("Não é possível alterar o CPF");
             }
@@ -59,7 +58,7 @@ namespace buckstore.auth.service.domain.Aggregates.UserAggregate
 
         public bool UserInformationSet()
         {
-            return !string.IsNullOrEmpty(_cpf) && !string.IsNullOrEmpty(_credCard);
+            return !string.IsNullOrEmpty(_cpf);
         }
         public bool VerifyUserPassword(string password)
         {
