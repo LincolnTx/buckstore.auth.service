@@ -40,20 +40,6 @@ namespace buckstore.auth.service.api.v1.Controllers
                     errors = _notifications.GetNotifications()
                 }
             );
-            // if (IsValidOperation())
-            // {
-            // 	return StatusCode(statusCode, new
-            // 	{
-            // 		success = true,
-            // 		data = result
-            // 	});
-            // }
-
-            // return BadRequest(new
-            // {
-            // 	success = false,
-            // 	errors = _notifications.GetNotifications()
-            // });
         }
 
 		protected string GetTokenClaim(string claim)
