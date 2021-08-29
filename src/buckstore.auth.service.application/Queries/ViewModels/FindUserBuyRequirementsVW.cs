@@ -6,6 +6,5 @@ namespace buckstore.auth.service.application.Queries.ViewModels
     {
         public Guid Id { get; set; }
         public string cpf { get; set; }
-        public string credCard { get; set; }
     }
 }
