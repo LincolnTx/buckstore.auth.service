@@ -3,6 +3,5 @@
     public class UserRequirementsToBuyDto
     {
         public bool CpfChecked{ get; set; }
-        public bool CardChecked { get; set; }
     }
 }

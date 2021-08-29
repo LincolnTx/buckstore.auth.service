@@ -24,7 +24,7 @@ namespace buckstore.auth.service.application.QueryHandlers
             using (var dbConnection = DbConnection)
             {
                 DefaultTypeMap.MatchNamesWithUnderscores = true;
-                const string sqlCommand = "SELECT u.cpf, u.\"credCard\" FROM  \"User\" u WHERE u.\"Id\" = @userId";
+                const string sqlCommand = "SELECT u.cpf FROM  \"User\" u WHERE u.\"Id\" = @userId";
 
                 try
                 {
@@ -34,20 +34,18 @@ namespace buckstore.auth.service.application.QueryHandlers
                     });
 
                     var cpfChecked = data.cpf != null;
-                    var cardChecked = data.credCard != null;
-                    
+
                     return  new UserRequirementsToBuyDto
                     {
                         CpfChecked = cpfChecked,
-                        CardChecked = cardChecked
                     };
                 }
                 catch (Exception e)
                 {
                     await _bus.Publish(new ExceptionNotification("002",
-                        "Usuário não encontrado", 
+                        "Usuário não encontrado",
                         "userID"), CancellationToken.None);
-                    
+
                     return default;
                 }
             }
