@@ -7,6 +7,8 @@ using buckstore.auth.service.application.Commands;
 using Microsoft.AspNetCore.Mvc;
 using buckstore.auth.service.domain.Exceptions;
 using buckstore.auth.service.application.Queries;
+using buckstore.auth.service.api.v1.Dtos;
+using buckstore.auth.service.application.Queries.DTOs;
 
 namespace buckstore.auth.service.api.v1.Controllers
 {
@@ -25,7 +27,7 @@ namespace buckstore.auth.service.api.v1.Controllers
             var userId = GetTokenClaim("id");
             var response = await _bus.Send(new VerifyRequirementsToBuyQuery(Guid.Parse(userId)));
 
-            return Response(200, response);
+            return Response(Ok(new BaseResponseDto<UserRequirementsToBuyDto> { Success = true, Data = response }));
         }
 
         [Authorize]
@@ -34,9 +36,9 @@ namespace buckstore.auth.service.api.v1.Controllers
         {
             var userId = GetTokenClaim("id");
             userInfoCommand.UserId = Guid.Parse(userId);
-            var response = await _bus.Send(userInfoCommand);
+            await _bus.Send(userInfoCommand);
 
-            return Response(204);
+            return Response(NoContent());
         }
     }
 }
