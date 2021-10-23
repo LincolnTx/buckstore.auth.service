@@ -38,6 +38,7 @@ namespace buckstore.auth.service.application.QueryHandlers
                     return  new UserRequirementsToBuyDto
                     {
                         CpfChecked = cpfChecked,
+                        Cpf = data.cpf ?? string.Empty
                     };
                 }
                 catch (Exception e)
