@@ -34,6 +34,7 @@ namespace buckstore.auth.service.infrastructure.CrossCutting.identity.JwtIdentit
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim("id", user.Id.ToString()),
+                new Claim("userName", user.Name)
             };
 
             claims.Add(new Claim("Role", UserType.From(user.UserType).Name));
