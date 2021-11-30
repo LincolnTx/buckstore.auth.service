@@ -37,7 +37,7 @@ namespace buckstore.auth.service.api.v1.Controllers
         }
 
         [HttpPost("register-admin")]
-        //[Authorize(nameof(UserType.Admin))]
+        [Authorize(nameof(UserType.Admin))]
         public async Task<IActionResult> CreateAdmin([FromBody] CreateUserCommand createAdminCommand)
         {
             createAdminCommand.UserType = UserType.Admin.Id;
